@@ -8,7 +8,7 @@ In this container, I will show you how to create a Twitter bot that scrapes the 
 
 ## Step One: Set-up and install requeriments
 
-###1) Twitter API: access to twitter api and create credentials
+### 1) Twitter API: access to twitter api and create credentials
 
 You must first open your twitter developer account in the Twitter Developer console.
 I leave you Jean-Christophe Chouinard's blog where he explains in greater detail how to access a twitter developer account and this other article to create your credentials once you have the account active. https://www.jcchouinard.com/twitter-api-credentials/
