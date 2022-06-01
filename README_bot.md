@@ -13,7 +13,7 @@ In this container, I will show you how to create a Twitter bot that scrapes the 
 You must first open your twitter developer account in the Twitter Developer console.
 I leave you Jean-Christophe Chouinard's blog where he explains in greater detail how to access a twitter developer account and this other article to create your credentials once you have the account active. https://www.jcchouinard.com/twitter-api-credentials/
 
-###2) AWS: Store Parameters in AWS, Create IAM User and Install CLI.
+### 2) AWS: Store Parameters in AWS, Create IAM User and Install CLI.
 With the twitter api credentials, we will use Parameter Store in aws Systems Manager to store the different keys and be able to link it with aws lambda. For this we enter the aws console.
 
 ![image](https://user-images.githubusercontent.com/82000274/171403178-a00631d0-f2ce-4638-9850-cf94969070d2.png)
@@ -24,14 +24,14 @@ We create the 4 parameters
 
 ![image](https://user-images.githubusercontent.com/82000274/171403253-f292656e-9f88-4791-b25a-4f1bbc977f42.png)
 
-###3) IAM: create an IAM user that allows us to interact with CLI
+### 3) IAM: create an IAM user that allows us to interact with CLI
 
 Log in to aws IAM, choose the users option and click on create a new one.
 Choose the username, access with SDKs, then add the permissions (Ideally, restrict the permissions as much as possible, but for this exercise we will use the administrator permission) and save the keys that will be generated.
 
 ![image](https://user-images.githubusercontent.com/82000274/171403576-89059191-62bb-4e56-8c16-4e5d2e1373ea.png)
 
-###4) Configure CLI: to control multiple AWS services from the command line and automate them through scripts.
+### 4) Configure CLI: to control multiple AWS services from the command line and automate them through scripts.
 
 To configure aws on your pc, Install CLI from here https://aws.amazon.com/cli/
 At the Command prompt type aws configure, then enter the keys generated in the IAM step.
@@ -40,7 +40,7 @@ At the Command prompt type aws configure, then enter the keys generated in the I
 
 Clever! Now if we can start writing code!
 
-##Second step: We create our python script
+## Second step: We create our python script
 
 Install libraries
  <img width="520" alt="raycast-untitled (2)" src="https://user-images.githubusercontent.com/82000274/171405070-2c70e6a7-5715-4392-838a-56449f6f28fa.png">
@@ -100,7 +100,7 @@ We verify if this string exists in the timeline and thus avoid posting the same 
   <img width="591" alt="raycast-untitled (14)" src="https://user-images.githubusercontent.com/82000274/171408858-1d375813-1627-4ff3-a397-3ceb59a8d85d.png">
 
 
-##Third Step: We create our lambda function
+## Third Step: We create our lambda function
  
 For this we enter the aws lambda service and press create function.
 We choose a name and the language in which our script is written, we leave the rest by default.
@@ -112,7 +112,7 @@ Click the "Attach policies" button. On the add permissions screen, search for th
  
  ![image](https://user-images.githubusercontent.com/82000274/171409832-dfd27ab3-54de-48a4-8b3d-c1c04875f7ea.png)
 
-##Fourth step: We upload our python code
+## Fourth step: We upload our python code
 
 First we have to install all the libraries used in a directory, if you are using a virtual environment you can use pip freeze > requirements.txt
  
@@ -143,7 +143,7 @@ Ready you can try it!
  
 ![image](https://user-images.githubusercontent.com/82000274/171470078-df1873b2-6b80-4516-b154-36a98a6a5fb1.png)
 
-##Fifth step: create a trigger to run daily
+ ## Fifth step: create a trigger to run daily
 
 entering Eventbridge click on create new rule.
 Enter the name, it is a good practice to name it including what it does.
