@@ -144,7 +144,7 @@ In the settings tab click edit increase the timeout to 1 minute.
 
 Ready you can try it!
  
-![image](https://user-images.githubusercontent.com/82000274/171470078-df1873b2-6b80-4516-b154-36a98a6a5fb1.png)
+![171470078-df1873b2-6b80-4516-b154-36a98a6a5fb1](https://user-images.githubusercontent.com/82000274/171508657-003d9650-e9a9-4e21-816e-72b41359d2a1.png)
 
  ## Fifth step: create a trigger to run daily
 
