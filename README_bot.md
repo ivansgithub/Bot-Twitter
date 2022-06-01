@@ -1,4 +1,4 @@
-# A serverlees AWS Twitter bot
+# A serverless AWS Twitter bot
 
 Finding quality and truthful content on social networks can be difficult, imagine having a Twitter bot that posts tweets with the information you need from reliable sources? Generate your own automatic content daily, allow your entire community to see it and also run completely without servers, it is possible to do it with python, tweepy and aws.
 
