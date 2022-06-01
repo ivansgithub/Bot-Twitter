@@ -36,7 +36,7 @@ Choose the username, access with SDKs, then add the permissions (Ideally, restri
 To configure aws on your pc, Install CLI from here https://aws.amazon.com/cli/
 At the Command prompt type aws configure, then enter the keys generated in the IAM step.
 
-![image](https://user-images.githubusercontent.com/82000274/171403746-3bd5d6a1-6b86-4213-b790-8ce3a15fccf5.png)
+![cliimagen](https://user-images.githubusercontent.com/82000274/171500880-5ce501d4-6b6b-402c-bac0-744b8f301f73.png)
 
 Clever! Now if we can start writing code!
 
@@ -44,7 +44,8 @@ Clever! Now if we can start writing code!
 
 Install libraries
 
-![cliimagen](https://user-images.githubusercontent.com/82000274/171500880-5ce501d4-6b6b-402c-bac0-744b8f301f73.png)
+<img width="520" alt="raycast-untitled (2)" src="https://user-images.githubusercontent.com/82000274/171503912-cf89af41-e94e-4e75-b3b2-5cb5708f504f.png">
+
 
 We are going to divide the code into three functions, the first one will call the parameters created previously to communicate with aws and the second one will do the scraping of the page and the third one will communicate with the twitter api to tweet the scraped content.
 
