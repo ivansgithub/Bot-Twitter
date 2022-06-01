@@ -54,7 +54,7 @@ We start by creating the function with the connector to the aws Systems Manager 
 
 <img width="520" alt="raycast-untitled (3)" src="https://user-images.githubusercontent.com/82000274/171405516-bd8f91ce-4463-494e-a00a-694bbc46626c.png">
 
-we convert it to a simple dictionary and return the dictionary as the result of the function.
+We convert it to a simple dictionary and return the dictionary as the result of the function.
 
 <img width="545" alt="raycast-untitled (4)" src="https://user-images.githubusercontent.com/82000274/171405697-fae3d234-5e37-491b-b238-979faddd09c5.png">
 
@@ -67,54 +67,54 @@ BeautifulSoup is the library that allows us to read the content of the response 
 
 <img width="564" alt="raycast-untitled (6)" src="https://user-images.githubusercontent.com/82000274/171406253-176e6d6e-c49c-40fc-aeec-61dc08f7251c.png">
 
-With Beautifilsoup, understanding a bit about the HTML structure, we can find the link of the report that is updated daily. We look for the <ul> tag of the 'post-interior-page' class and extract from the <a> tag the 'href' which in html is the element that contains the hyperlink.
+With Beautifilsoup, understanding a bit about the HTML structure, we can find the link of the report that is updated daily. We look for the <ul> tag of the 'post interior-page' class and extract from the <a> tag the 'href' which in html is the element that contains the hyperlink.
  
- <img width="855" alt="raycast-untitled (7)" src="https://user-images.githubusercontent.com/82000274/171406505-66e31305-e32b-44ea-812f-9d96107fb016.png">
+<img width="855" alt="raycast-untitled (7)" src="https://user-images.githubusercontent.com/82000274/171406505-66e31305-e32b-44ea-812f-9d96107fb016.png">
 
 We create a new link to be called with request
  
-  <img width="709" alt="raycast-untitled (8)" src="https://user-images.githubusercontent.com/82000274/171406657-29a10800-d3cd-4572-a521-144b74e85488.png">
+<img width="709" alt="raycast-untitled (8)" src="https://user-images.githubusercontent.com/82000274/171406657-29a10800-d3cd-4572-a521-144b74e85488.png">
  
 When entering the link you will be able to realize that it is a pdf file, therefore Beautifulsoup stops working to search for content in this type of page, so we must use a new library called pdfplumber. io.BytesIO (r.content): It is used because r.content is a binary code and its use is necessary to interpret the bytes.
   
- <img width="520" alt="raycast-untitled (9)" src="https://user-images.githubusercontent.com/82000274/171406948-2379f058-f1bf-460e-9a3c-ba0a705b5b24.png">
+<img width="520" alt="raycast-untitled (9)" src="https://user-images.githubusercontent.com/82000274/171406948-2379f058-f1bf-460e-9a3c-ba0a705b5b24.png">
 
 We locate the pdf page and the text that we want to extract for which we need the library re the functions in this module let you check if a particular string matches a given regular expression. 
 
- <img width="920" alt="raycast-untitled (10)" src="https://user-images.githubusercontent.com/82000274/171407598-669e601e-fcf1-49af-b0b9-932808a7b0ef.png">
+<img width="920" alt="raycast-untitled (10)" src="https://user-images.githubusercontent.com/82000274/171407598-669e601e-fcf1-49af-b0b9-932808a7b0ef.png">
 
 We create a small dictionary to sort the data and return it.
  
- <img width="520" alt="raycast-untitled (11)" src="https://user-images.githubusercontent.com/82000274/171407820-0534f6b8-1e92-4aa1-a67f-acfbf7b666a1.png">
+<img width="520" alt="raycast-untitled (11)" src="https://user-images.githubusercontent.com/82000274/171407820-0534f6b8-1e92-4aa1-a67f-acfbf7b666a1.png">
   
   
 Now we create the function lambda_handler method, which is what we will have our Lambda function call. Here the twitter api will also be called
 
 We create the string that we want to post
   
-  <img width="920" alt="raycast-untitled (12)" src="https://user-images.githubusercontent.com/82000274/171408485-29b0131d-548f-4bf6-882b-ef27fe3050f5.png">
+<img width="920" alt="raycast-untitled (12)" src="https://user-images.githubusercontent.com/82000274/171408485-29b0131d-548f-4bf6-882b-ef27fe3050f5.png">
  
 We call the twitter api for this we pass the parameters with oauth.
 
- <img width="873" alt="raycast-untitled (13)" src="https://user-images.githubusercontent.com/82000274/171408653-f56f3deb-79ea-49f2-a5f9-4b9384f6552c.png">
+<img width="873" alt="raycast-untitled (13)" src="https://user-images.githubusercontent.com/82000274/171408653-f56f3deb-79ea-49f2-a5f9-4b9384f6552c.png">
 
 We verify if this string exists in the timeline and thus avoid posting the same tweet twice on days when the report is not updated. If it is not the case, we post the new tweet.
   
-  <img width="591" alt="raycast-untitled (14)" src="https://user-images.githubusercontent.com/82000274/171408858-1d375813-1627-4ff3-a397-3ceb59a8d85d.png">
+<img width="591" alt="raycast-untitled (14)" src="https://user-images.githubusercontent.com/82000274/171408858-1d375813-1627-4ff3-a397-3ceb59a8d85d.png">
 
 
 ## Third Step: We create our lambda function
  
 For this we enter the aws lambda service and press create function.
 We choose a name and the language in which our script is written, we leave the rest by default.
- 
- ![image](https://user-images.githubusercontent.com/82000274/171409776-987a6b34-e869-4d77-b804-dc99f301ff3a.png)
+
+![Vídeo sin título ‐ Hecho con Clipchamp (2)](https://user-images.githubusercontent.com/82000274/171508007-5435e4c7-d402-4cf8-9b87-8c550db725a2.gif)
 
 Then we add the permission for our lambda function to communicate with the parameters created in system manager, for this we go to configuration and open the link the "Execution role" panel.
 Click the "Attach policies" button. On the add permissions screen, search for the "AmazonSSMReadOnlyAccess" permission.  
  
- ![image](https://user-images.githubusercontent.com/82000274/171409832-dfd27ab3-54de-48a4-8b3d-c1c04875f7ea.png)
-
+![Vídeo sin título ‐ Hecho con Clipchamp (3)](https://user-images.githubusercontent.com/82000274/171508094-8b0b81b0-c362-4ec1-8263-2ec39ce31fef.gif)
+ 
 ## Fourth step: We upload our python code
 
 First we have to install all the libraries used in a directory, if you are using a virtual environment you can use pip freeze > requirements.txt
@@ -139,8 +139,8 @@ Select the zip file you created
  ![image](https://user-images.githubusercontent.com/82000274/171410095-68916c99-84ea-41a6-9c03-c72ebe3ebe86.png)
 
 In the settings tab click edit increase the timeout to 1 minute.
-
- ![image](https://user-images.githubusercontent.com/82000274/171470011-c0d217d4-e221-41eb-a487-165c5ef586a3.png)
+ 
+![Vídeo sin título ‐ Hecho con Clipchamp (6)](https://user-images.githubusercontent.com/82000274/171508219-e7dc94fe-7eb8-4c34-bc7f-b76155a50d96.gif)
 
 Ready you can try it!
  
@@ -155,8 +155,8 @@ Select "Schedule." On the next page, place the cron that indicates how often the
 
 In the "Select Targets" section, select "Lambda Function" for the target, and then choose your Lambda function. 
  
-![image](https://user-images.githubusercontent.com/82000274/171470143-d90ee8dd-84db-4c5c-9fa3-f6f8b2e425a2.png)
- 
+
+ ![Vídeo sin título ‐ Hecho con Clipchamp (5)](https://user-images.githubusercontent.com/82000274/171508281-1ae5dcd6-97ba-40ab-9030-5d4b08acd683.gif)
  
 Done, we have our bot running in a serverless daily!
 
