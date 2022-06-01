@@ -2,81 +2,93 @@ import requests
 from bs4 import BeautifulSoup as BS
 import pdfplumber
 from io import BytesIO
+import re 
+import boto3
 import tweepy
-import re
 
 
-# include everything in a function to run in lambda aws
-
-def lamba_handle(event,context):
-        
-    # make a request to the page to scrape    
-    r=requests.get('http://www.bcra.gob.ar/PublicacionesEstadisticas/Informe_monetario_diario.asp')
-        
-    # get the content of the html    
-    dom = BS(r.content , features = 'html.parser')
-        
-    #search for the element with the link we need    
-    dom2=dom.find('ul',{'class':'post-pagina-interior'})
-        
-    dom3=dom2.find('a')
-        
-    dom4=dom3.get('href')
-        
-    dom5='http://www.bcra.gob.ar'+dom4.replace('..','')
-        
-    # make a second request to the page to scrape    
-    rq = requests.get(dom5)
+def get_twitter_keys():
     
-    #Download the text from the pdf online
-    pdf = pdfplumber.load(BytesIO(rq.content))
+    aws_client = boto3.client('ssm')
+
+    parameters = aws_client.get_parameters(
+        Names=[
+            'api.key.twitter',
+            'api.key.secret.twitter',
+            'access.token.twitter',
+            'access.token.secret.twitter'
+        ],
+        WithDecryption=True
+    )
+
+    keys = {}
+    for parameter in parameters['Parameters']:
+        keys[parameter['Name']] = parameter['Value']
+
+    return keys
+
+
+def scrape_page():
+    response=requests.get('http://www.bcra.gob.ar/PublicacionesEstadisticas/Informe_monetario_diario.asp') 
+
+ 
+    dom = BS(response.content , features = 'html.parser') 
+    find_link_report=dom.find('ul',{'class':'post-pagina-interior'}).find('a').get('href')
+
+    link_report='http://www.bcra.gob.ar'+find_link_report.replace('..','')
+
+    r=requests.get(link_report)
+
+    pdf = pdfplumber.open(BytesIO(r.content))
+
     page = pdf.pages[3]
     page2 = pdf.pages[2]
     text=page.extract_text()
-    text3=page2.extract_text()
-    
-    #text mining process
+    text2=page2.extract_text()
+
     text=text.split('\n')
     
-    text3=text3.replace('\n','')
+    text3=text2.replace('\n','')
             
-    text2=[i for i in text if 'Base monetaria' in i]
+    text4=[i for i in text if 'Base monetaria' in i]
             
-    amount=text2[0].split('Base monetaria')[2]       
+    amount=text4[0].split('Base monetaria')[2]       
     amount=amount.split(' ')
     amount=amount[1].strip()
+
            
     date=re.search(r'Informe Monetario Diario+\s+[0-9]{1,2}\s\w\w\s(?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\s\w\w\s[0-9]{3,4}',text3)
-    date=date.group().replace('Informe Monetario Diario  ', '')
-        
-    #access to twitter api    
-        
-        
-    api_key='Your_key'
-    api_key_secret='Your_key_secret'
-        
-    access_token='Your_token'
-    access_token_secret='Your_secret_token'
-        
-    auth = tweepy.OAuthHandler(api_key, api_key_secret)
-    auth.set_access_token(access_token,access_token_secret)
-        
-    api = tweepy.API(auth)
-        
-        
-    #tweet format
-    single_tweet='La variacion de la base moneraria el ' + fecha +'\n'+'fue de $'+ monto + ' millones '
+    date=date.group().replace('Informe Monetario Diario ', '')
+
+    content = {}
+     
+    content['date'] = date
+    content['amount']=amount
+
+    return content
+
+
+def lambda_handler(event, context):
+   
+
     
-    #delete a tweet with the same format if it exists
-    for statuss in tweepy.Cursor(api.user_timeline).items():
+    content= scrape_page()
+    
+    single_tweet='La variacion de la base moneraria el' + content['date'] +' fue de $'+  content['amount'] + ' millones'
+    
+    keys = get_twitter_keys()
+    auth = tweepy.OAuthHandler(keys['api.key.twitter'], keys['api.key.secret.twitter']) 
+    auth.set_access_token(keys['access.token.twitter'],keys['access.token.secret.twitter']) 
+    api = tweepy.API(auth) 
+
+    
+    
+    
+    for statuss in tweepy.Cursor(api.user_timeline).items(1):
       
-        try:
-            api.destroy_status(statuss.id)
-        except:
+        
+        if single_tweet == statuss._json['text']:
             pass
             
-    #post the twitt
-    api.update_status(status=single_tweet)
-
-
-
+        else:
+            api.update_status(status=single_tweet)
