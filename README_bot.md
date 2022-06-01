@@ -29,7 +29,8 @@ We create the 4 parameters
 Log in to aws IAM, choose the users option and click on create a new one.
 Choose the username, access with SDKs, then add the permissions (Ideally, restrict the permissions as much as possible, but for this exercise we will use the administrator permission) and save the keys that will be generated.
 
-![image](https://user-images.githubusercontent.com/82000274/171403576-89059191-62bb-4e56-8c16-4e5d2e1373ea.png)
+![Vídeo sin título ‐ Hecho con Clipchamp](https://user-images.githubusercontent.com/82000274/171504377-16f790bc-164e-4740-8b1d-b0ee08ff1bfe.gif)
+
 
 ### 4) Configure CLI: to control multiple AWS services from the command line and automate them through scripts.
 
