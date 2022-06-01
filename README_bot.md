@@ -43,7 +43,8 @@ Clever! Now if we can start writing code!
 ## Second step: We create our python script
 
 Install libraries
- <img width="520" alt="raycast-untitled (2)" src="https://user-images.githubusercontent.com/82000274/171405070-2c70e6a7-5715-4392-838a-56449f6f28fa.png">
+
+![cliimagen](https://user-images.githubusercontent.com/82000274/171500880-5ce501d4-6b6b-402c-bac0-744b8f301f73.png)
 
 We are going to divide the code into three functions, the first one will call the parameters created previously to communicate with aws and the second one will do the scraping of the page and the third one will communicate with the twitter api to tweet the scraped content.
 
