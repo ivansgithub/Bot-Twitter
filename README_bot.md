@@ -66,7 +66,7 @@ BeautifulSoup is the library that allows us to read the content of the response 
 
 <img width="564" alt="raycast-untitled (6)" src="https://user-images.githubusercontent.com/82000274/171406253-176e6d6e-c49c-40fc-aeec-61dc08f7251c.png">
 
-With Beautifilsoup, we can find the link of the report that is updated daily. Look for the <ul> tag of the 'post interior-page' class and extract from the <a> tag the 'href' which in html is the element that contains the hyperlink.
+With Beautifilsoup, we can find the link of the report that is updated daily. Look for the <ul> tag of the 'post interior-page' class and extract from the "a" tag the 'href' which in html is the element that contains the hyperlink.
  
 <img width="855" alt="raycast-untitled (7)" src="https://user-images.githubusercontent.com/82000274/171406505-66e31305-e32b-44ea-812f-9d96107fb016.png">
 
@@ -74,7 +74,7 @@ Create a new link to be called with request.
  
 <img width="709" alt="raycast-untitled (8)" src="https://user-images.githubusercontent.com/82000274/171406657-29a10800-d3cd-4572-a521-144b74e85488.png">
  
-When entering the link, you will be able to realize that it is a PDF file. Therefore, Beautifulsoup stops working to search for content on this type of page, so we must use a new library called pdfplumber. This is used because r.content is a binary code and its use is necessary to interpret the bytes.
+When entering the link, you will be able to realize that it is a PDF file. Therefore, Beautifulsoup stops working to search for content on this type of page, so we must use a new library called pdfplumber. This is used because "response.content" is a binary code and its use is necessary to interpret the bytes.
   
 <img width="520" alt="raycast-untitled (9)" src="https://user-images.githubusercontent.com/82000274/171406948-2379f058-f1bf-460e-9a3c-ba0a705b5b24.png">
 
