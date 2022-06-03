@@ -66,7 +66,7 @@ BeautifulSoup is the library that allows us to read the content of the response 
 
 <img width="564" alt="raycast-untitled (6)" src="https://user-images.githubusercontent.com/82000274/171406253-176e6d6e-c49c-40fc-aeec-61dc08f7251c.png">
 
-With Beautifilsoup, we can find the link of the report that is updated daily. Look for the <ul> tag of the "post interior-page" class and extract from the "a" tag the "href" which in html is the element that contains the hyperlink.
+With Beautifilsoup, we can find the link of the report that is updated daily. Look for the "ul" tag of the "post interior-page" class and extract from the "a" tag the "href" which in html is the element that contains the hyperlink.
  
 <img width="855" alt="raycast-untitled (7)" src="https://user-images.githubusercontent.com/82000274/171406505-66e31305-e32b-44ea-812f-9d96107fb016.png">
 
